@@ -17,6 +17,20 @@ app.get("/", (req, res) => {
   res.send("Welcome to Adventure Tours API");
 });
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    // Connect to MongoDB
+    await connectDB();
+
+    // Start listening for requests
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to connect to MongoDB:', error);
+    process.exit(1); // Exit the process if unable to connect to the database
+  }
+};
+
+// Call the function to start the server after database connection
+startServer();
