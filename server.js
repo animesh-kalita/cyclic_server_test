@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./src/db');
+const cors = require('cors');
 const tourRoutes = require('./src/Routes/tourRoutes');
 
 const app = express();
@@ -10,6 +11,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/tours', tourRoutes);
